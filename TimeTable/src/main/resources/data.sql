@@ -80,6 +80,22 @@ WHERE
             course_name = 'Operating Systems'
     );
 
+INSERT INTO
+    courses (
+        course_name,
+        faculty,
+        room_no,
+        specialization
+    )
+SELECT 'Machine Learning', 'Andrew Ng', 'R301', 'Computer Science'
+WHERE
+    NOT EXISTS (
+        SELECT 1
+        FROM courses
+        WHERE
+            course_name = 'Machine Learning'
+    );
+
 -- Timeslot inserts
 -- Monday slots
 INSERT INTO
@@ -401,6 +417,18 @@ INSERT IGNORE INTO
 VALUES (5, 7);
 -- Slot 2 (Wednesday 09:30-11:00)
 
+-- "Machine Learning" (Course ID: 6)
+-- Wednesday 11:00-13:00 (Timeslot ID: 9)
+-- Thursday 09:30-11:00 (Timeslot ID: 11)
+INSERT IGNORE INTO
+    course_timeslot (course_id, timeslot_id)
+VALUES (6, 9);
+-- Slot 1 (Wednesday 11:00-13:00)
+INSERT IGNORE INTO
+    course_timeslot (course_id, timeslot_id)
+VALUES (6, 11);
+-- Slot 2 (Thursday 09:30-11:00)
+
 -- ==========================================
 -- USER TO BE MODIFIED
 -- REPLACE 'YOUR_EMAIL_HERE' WITH YOUR GOOGLE EMAIL
@@ -440,7 +468,7 @@ WHERE
 
 INSERT INTO
     students (first_name, last_name, email)
-SELECT 'D', 'Jain', 'deekshajain033@gmail.com'
+SELECT 'DJ', 'Jain', 'deekshajain033@gmail.com'
 WHERE
     NOT EXISTS (
         SELECT 1
@@ -467,6 +495,13 @@ WHERE
 INSERT IGNORE INTO
     student_courses (student_id, course_id)
 SELECT s.id, 3
+FROM students s
+WHERE
+    s.email = 'deekshajain033@gmail.com';
+
+INSERT IGNORE INTO
+    student_courses (student_id, course_id)
+SELECT s.id, 6
 FROM students s
 WHERE
     s.email = 'deekshajain033@gmail.com';

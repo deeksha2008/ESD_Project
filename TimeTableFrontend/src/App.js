@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Typography, Button, Box, Paper, Grid } from '@mui/material';
 import LoginForm from './components/LoginForm';
+import AccessDenied from './components/AccessDenied';
 import Timetable from './components/Timetable';
 import RegisteredCourses from './components/RegisteredCourses';
 import useAuth from './hooks/useAuth';
@@ -22,8 +23,17 @@ const App = () => {
     const courses = useCourses(studentId);
     const [showTimetable, setShowTimetable] = React.useState(false);
 
+    // Check for error parameter
+    const queryParams = new URLSearchParams(window.location.search);
+    const error = queryParams.get('error');
+
     if (loading) {
         return <div>Loading...</div>;
+    }
+
+    // Show Access Denied page if unauthorized
+    if (error === 'unauthorized') {
+        return <AccessDenied />;
     }
 
     return (

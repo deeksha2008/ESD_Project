@@ -5,7 +5,7 @@ const useCourses = (studentId) => {
 
     useEffect(() => {
         if (studentId) {
-            fetch(`http://localhost:8082/api/v1/student/${studentId}/courses`, {
+            fetch(`http://localhost:8082/api/v1/student/${studentId}/registered-courses`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
