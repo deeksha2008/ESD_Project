@@ -14,4 +14,5 @@ public class CourseService {
 
     public List<Course> getAll() {
         return courseRepo.findAllByOrderByIdAsc(); 
+    }
 }
