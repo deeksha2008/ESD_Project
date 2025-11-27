@@ -6,13 +6,6 @@ CREATE TABLE IF NOT EXISTS students (
     email VARCHAR(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS password (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    student_id BIGINT UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS timeslot (
     id INT AUTO_INCREMENT PRIMARY KEY,
     day_of_week VARCHAR(10),
@@ -32,14 +25,14 @@ CREATE TABLE IF NOT EXISTS student_courses (
     student_id BIGINT NOT NULL,
     course_id BIGINT NOT NULL,
     PRIMARY KEY (student_id, course_id),
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+    FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS course_timeslot (
     course_id BIGINT NOT NULL,
     timeslot_id INT NOT NULL,
     PRIMARY KEY (course_id, timeslot_id),
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
-    FOREIGN KEY (timeslot_id) REFERENCES timeslot(id) ON DELETE CASCADE
+    FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE,
+    FOREIGN KEY (timeslot_id) REFERENCES timeslot (id) ON DELETE CASCADE
 );

@@ -10,9 +10,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CourseService {
-    private final CourseRepo courseRepo; // Marked as final for proper injection
+    private final CourseRepo courseRepo; 
 
     public List<Course> getAll() {
-        return courseRepo.findAllByOrderByIdAsc(); // This will now work correctly
-    }
+        return courseRepo.findAllByOrderByIdAsc(); 
 }

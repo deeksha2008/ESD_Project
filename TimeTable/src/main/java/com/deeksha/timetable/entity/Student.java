@@ -32,10 +32,6 @@ public class Student {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Password password;
-
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     @JoinTable(
